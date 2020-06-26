@@ -8,12 +8,21 @@ from datetime import datetime
 class BaseModel():
     """ [Class BaseModel]
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """ [Constructor of class]
         """
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if len(kwargs) != 0:
+            for k, v in kwargs.items():
+                if k != "__class__":
+                    setattr(self, k, v)
+            self.__dict__["created_at"] =\
+                datetime.strptime(self.created_at, "%Y-%m-%dT%H:%M:%S.%f")
+            self.__dict__["updated_at"] =\
+                datetime.strptime(self.updated_at, "%Y-%m-%dT%H:%M:%S.%f")
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ This method print the
