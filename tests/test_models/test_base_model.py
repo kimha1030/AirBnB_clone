@@ -18,3 +18,15 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(type(base1.id) == str)
         self.assertTrue(type(base1.updated_at) == datetime)
         self.assertTrue(type(base1.created_at) == datetime)
+
+    def test_type_kwargs(self):
+        """Test type"""
+        my_dict = {'id': '56d43177-cc5f-4d6c-a0c1-e167f8c27337',
+                   'created_at': '2017-09-28T21:03:54.052298',
+                   '__class__': 'BaseModel', 'my_number': 89,
+                   'updated_at': '2017-09-28T21:03:54.052302',
+                   'name': 'Holberton'}
+        base2 = BaseModel(my_dict)
+        self.assertTrue(type(base2.id) == str)
+        self.assertTrue(type(base2.updated_at) == datetime)
+        self.assertTrue(type(base2.created_at) == datetime)
