@@ -3,7 +3,7 @@
 """
 from uuid import uuid4
 from datetime import datetime
-
+from models import storage
 
 class BaseModel():
     """ [Class BaseModel]
@@ -11,18 +11,19 @@ class BaseModel():
     def __init__(self, *args, **kwargs):
         """ [Constructor of class]
         """
-        if len(kwargs) != 0:
+        if len(kwargs) == 0:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            #storage.new(self)
+        else:
             for k, v in kwargs.items():
                 if k != "__class__":
                     setattr(self, k, v)
             self.__dict__["created_at"] =\
-                datetime.strptime(self.created_at, "%Y-%m-%dT%H:%M:%S.%f")
+            datetime.strptime(self.created_at, "%Y-%m-%dT%H:%M:%S.%f")
             self.__dict__["updated_at"] =\
-                datetime.strptime(self.updated_at, "%Y-%m-%dT%H:%M:%S.%f")
-        else:
-            self.id = str(uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            datetime.strptime(self.updated_at, "%Y-%m-%dT%H:%M:%S.%f")
 
     def __str__(self):
         """ This method print the
@@ -35,6 +36,7 @@ class BaseModel():
         """This method save the current date of update
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """This method return a dict
