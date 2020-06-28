@@ -18,10 +18,10 @@ class BaseModel():
                 if k == "id":
                     self.id = v
                 elif k == "create_at":
-                    self.__dict__[k] =
+                    self.__dict__[k] =\
                     datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 elif k == "update_at":
-                    self.__dict__[k] =
+                    self.__dict__[k] =\
                     datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
                         if k != "__class__":
