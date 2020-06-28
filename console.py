@@ -2,7 +2,10 @@
 """Interpreter of line commands
 """
 from models import storage
+from models.base_model import BaseModel
+import models
 import cmd
+import sys
 
 
 class HBNBCommand(cmd.Cmd):
@@ -24,6 +27,22 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Empty line + enter"""
         pass
+
+    def do_create(self, args):
+        """Create an instance of BaseModel
+
+        Args:
+            args (str): Class Name
+        """
+        line = args.split()
+        if len(line) == 0:
+            print("** class name missing **")
+        elif globals().get(line[0]) is None:
+            print("** class doesn't exist **")
+        else:
+            obj = eval(line[0])()
+            obj.save()
+            print("{}".format(obj.id))
 
 if __name__ == '__main__':
     interpreter = HBNBCommand()
