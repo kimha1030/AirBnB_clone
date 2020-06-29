@@ -3,6 +3,12 @@
 """
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 import models
 import cmd
 import sys
@@ -90,6 +96,12 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, args):
+        """ Prints all string representation of all
+            instances based or not on the class name.
+
+        Args:
+            args ([str]): Class name and id
+        """
         my_list = []
         line = args.split()
         if len(line) > 0:
@@ -97,10 +109,47 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
             else:
                 my_dict = storage.all()
-                for  k, v in my_dict.items:
-                    
+                for k, v in my_dict.items():
+                    class_name = k.split(".", 1)
+                    if line[0] == class_name[0]:
+                        my_list.append(str(v))
+                print(my_list)
+        else:
+            my_dict = storage.all()
+            for k, v in my_dict.items():
+                my_list.append(str(v))
+            print(my_list)
 
+    def do_update(self, args):
+        """ Updates an instance based on the class
+        name and id by adding or updating attribute
 
+        Args:
+            args ([str]): Class name and id
+        """
+        line = args.split()
+        if len(line) == 0 or line[0] == "":
+            print("** class name missing **")
+        elif globals().get(line[0]) is None:
+            print("** class doesn't exist **")
+        elif len(line) == 1 or line[1] == "":
+            print("** instance id missing **")
+        elif len(line) == 2:
+            my_dict = storage.all()
+            key = line[0]+"."+line[1]
+            if key not in my_dict:
+                print("** no instance found **")
+            else:
+                print("** attribute name missing **")
+        elif len(line) == 3:
+            print("** value missing **")
+        else:
+            my_dict = storage.all()
+            key = line[0]+"."+line[1]
+            if key in my_dict:
+                setattr(my_dict[key], line[2], line[3])
+                storage.save()
+                print(my_dict[key])
 
 if __name__ == '__main__':
     interpreter = HBNBCommand()
