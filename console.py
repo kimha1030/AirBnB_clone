@@ -44,6 +44,64 @@ class HBNBCommand(cmd.Cmd):
             obj.save()
             print("{}".format(obj.id))
 
+    def do_show(self, args):
+        """ Prints the string representation of an instance
+            based on the class name and id
+
+        Args:
+            args ([str]): Class name and id
+        """
+        line = args.split()
+        if len(line) == 0:
+            print("** class name missing **")
+        elif globals().get(line[0]) is None:
+            print("** class doesn't exist **")
+        elif len(line) == 1:
+            print("** instance id missing **")
+        else:
+            my_dict = storage.all()
+            key = line[0]+"."+line[1]
+            if key in my_dict:
+                print(my_dict[key])
+            else:
+                print("** no instance found **")
+
+    def do_destroy(self, args):
+        """  Deletes an instance based on the class name
+             and id (save the change into the JSON file)
+
+        Args:
+            args ([str]): Class name and id
+        """
+        line = args.split()
+        if len(line) == 0:
+            print("** class name missing **")
+        elif globals().get(line[0]) is None:
+            print("** class doesn't exist **")
+        elif len(line) == 1:
+            print("** instance id missing **")
+        else:
+            my_dict = storage.all()
+            key = line[0]+"."+line[1]
+            if key in my_dict:
+                    del my_dict[key]
+                    storage.save()
+            else:
+                print("** no instance found **")
+
+    def do_all(self, args):
+        my_list = []
+        line = args.split()
+        if len(line) > 0:
+            if globals().get(line[0]) is None:
+                print("** class doesn't exist **")
+            else:
+                my_dict = storage.all()
+                for  k, v in my_dict.items:
+                    
+
+
+
 if __name__ == '__main__':
     interpreter = HBNBCommand()
     interpreter.cmdloop()
