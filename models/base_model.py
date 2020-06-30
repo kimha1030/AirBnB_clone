@@ -4,7 +4,6 @@
 from uuid import uuid4
 from datetime import datetime
 import models
-import json
 
 
 class BaseModel():
@@ -24,8 +23,8 @@ class BaseModel():
                     self.__dict__[k] =\
                      datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 else:
-                        if k != "__class__":
-                            setattr(self, k, v)
+                    if k != "__class__":
+                        setattr(self, k, v)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
