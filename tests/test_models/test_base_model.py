@@ -12,6 +12,10 @@ class TestBaseModel(unittest.TestCase):
         result = pep8style.check_files(['./models/base_model.py'])
         self.assertEqual(result.total_errors, 0)
 
+    def test_docstring(self):
+        """Check the docstring in the class"""
+        self.assertTrue(len(BaseModel.__doc__) >= 1)
+
     def test_type(self):
         """Test type"""
         base1 = BaseModel()
