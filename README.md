@@ -26,7 +26,7 @@ Airbnb clone - The console is a command line interpreter that allows us to manip
 ---
 ## Tasks
 
-### [1. Be PEP8 compliant!]
+### 1. Be PEP8 compliant!
 * Write beautiful code that passes the PEP8 checks.
 
 ### [2. Unittests](./tests/test_models)
@@ -85,7 +85,7 @@ Quit command to exit the program
 To use this project, you must follow these steps:
 * Clone this repository.
 * Subsequently, run the executable file, writing in the command line: ./console.py
-* After the above, you can see the command interpreter, in which you can enter commands and observe the obtained output.
+* After the above, you can see the command interpreter, in which you can use the actions: show, create, destroy, update and all with all classes.
 
 ---
 ## Authors
