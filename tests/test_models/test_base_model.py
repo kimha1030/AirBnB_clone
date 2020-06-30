@@ -30,3 +30,46 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(type(base2.id) == str)
         self.assertTrue(type(base2.updated_at) == datetime)
         self.assertTrue(type(base2.created_at) == datetime)
+
+    def test_instaces(self):
+        """Check if is a instance"""
+        base2 = BaseModel()
+        base3 = BaseModel()
+        self.assertTrue(isinstance(base2, BaseModel))
+        self.assertTrue(isinstance(base3, BaseModel))
+
+    def test_type_instaces(self):
+        """Check if is a instance"""
+        base2 = BaseModel()
+        base3 = BaseModel()
+        self.assertTrue((type(base2), BaseModel))
+        self.assertTrue((type(base3), BaseModel))
+
+    def test_name(self):
+        """Check name in BaseModel"""
+        base4 = BaseModel()
+        base4.name = "Holberton"
+        self.assertEqual(type(base4.name), str)
+        self.assertEqual(base4.name, "Holberton")
+
+    def test_id(self):
+        """Check id in BaseModel"""
+        base4 = BaseModel()
+        self.assertEqual(type(base4.id), str)
+
+    def test_update(self):
+        """Check if update is equal"""
+        base5 = BaseModel()
+        date_now = base5.updated_at
+        base5.updated_at
+        self.assertTrue(date_now, base5.updated_at)
+
+    def test_to_dict(self):
+        """Check into dictionary"""
+        base6 = BaseModel()
+        my_dict = base6.to_dict()
+        self.assertEqual(type(my_dict), dict)
+        self.assertEqual(my_dict['__class__'], 'BaseModel')
+        self.assertEqual(type(my_dict['created_at']), str)
+        self.assertEqual(type(my_dict['updated_at']), str)
+        self.assertEqual(type(my_dict['id']), str)
