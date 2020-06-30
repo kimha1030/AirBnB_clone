@@ -12,7 +12,7 @@ from models.review import Review
 import models
 import cmd
 import sys
-from shlex import split
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -128,7 +128,7 @@ class HBNBCommand(cmd.Cmd):
         Args:
             args ([str]): Class name and id
         """
-        line = args.split()
+        line = shlex.split(args)
         if len(line) == 0 or line[0] == "":
             print("** class name missing **")
         elif globals().get(line[0]) is None:
