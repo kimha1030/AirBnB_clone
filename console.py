@@ -14,6 +14,7 @@ import cmd
 import sys
 from shlex import split
 
+
 class HBNBCommand(cmd.Cmd):
     """This class contains the interpreter of commands"""
     prompt = "(hbnb) "
