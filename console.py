@@ -151,6 +151,8 @@ class HBNBCommand(cmd.Cmd):
                 setattr(my_dict[key], line[2], line[3])
                 storage.save()
                 print(my_dict[key])
+            else:
+                print("** no instance found **")
 
 if __name__ == '__main__':
     interpreter = HBNBCommand()
