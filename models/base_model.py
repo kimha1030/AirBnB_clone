@@ -1,14 +1,16 @@
 #!/usr/bin/python3
-"""Base class
+"""Base Model class
 """
+import models
+import json
 from uuid import uuid4
 from datetime import datetime
-import models
 
 
 class BaseModel():
     """ [Class BaseModel]
     """
+
     def __init__(self, *args, **kwargs):
         """ [Constructor of class]
         """
