@@ -2,24 +2,25 @@
 """unittest User class
 """
 import unittest
-from models.user import User
 import pep8
+from models.user import User
 
 
 class TestUser(unittest.TestCase):
     """Test User class"""
 
-    def test_User_pep8_conformance(self):
+    def test_user_pep8_conformance(self):
         """Test that we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['./tests/test_models/test_user.py'])
+        result = pep8style.check_files(['./models/user.py'])
         self.assertEqual(result.total_errors, 0)
 
-    def test_User_docstring(self):
+    def test_user_docstring(self):
         """Check the docstring in the class"""
         self.assertTrue(len(User.__doc__) >= 1)
 
     def test_user(self):
+        """Test for other attributes of Class User"""
         user1 = User()
         self.assertTrue(type(user1.id) == str)
         self.assertTrue(type(user1.email) == str)

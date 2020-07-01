@@ -12,7 +12,7 @@ class TestState(unittest.TestCase):
     def test_amenity_pep8_conformance(self):
         """Test that we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['./tests/test_models/test_amenity.py'])
+        result = pep8style.check_files(['./models/amenity.py'])
         self.assertEqual(result.total_errors, 0)
 
     def test_amenity_docstring(self):
