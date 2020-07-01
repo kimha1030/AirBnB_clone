@@ -77,3 +77,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(my_dict['created_at']), str)
         self.assertEqual(type(my_dict['updated_at']), str)
         self.assertEqual(type(my_dict['id']), str)
+
+if __name__ == '__main__':
+    unittest.main()
