@@ -40,8 +40,11 @@ class TestFileStorage(unittest.TestCase):
         """Check method all"""
         FileStorage._FileStorage__objects = {}
         base1 = BaseModel()
-        my_dict = FileStorage._FileStorage__objects
-        self.assertEqual(type(my_dict), dict)
+        id_key = type(base1).__name__ + "." + base1.id
+        store = FileStorage()
+        new_dict = store.all()
+        self.assertEqual(type(new_dict), dict)
+        self.assertTrue(new_dict[id_key] is base1)
 
     def test_new(self):
         """Check method new"""
