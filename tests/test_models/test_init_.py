@@ -15,3 +15,6 @@ class TestInit(unittest.TestCase):
     def test_init_docstring(self):
         """Check the docstring in the class"""
         self.assertTrue(len(__init__.__doc__) >= 1)
+
+if __name__ == '__main__':
+    unittest.main()
