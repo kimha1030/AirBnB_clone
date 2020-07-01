@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""unittest User class
+"""unittest State class
 """
 import unittest
 from models.state import State
@@ -7,12 +7,12 @@ import pep8
 
 
 class TestState(unittest.TestCase):
-    """Test User class"""
+    """Test State class"""
 
     def test_init_pep8_conformance(self):
         """Test that we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['./tests/test_models/test_state.py'])
+        result = pep8style.check_files(['./models/state.py'])
         self.assertEqual(result.total_errors, 0)
 
     def test_init_docstring(self):
