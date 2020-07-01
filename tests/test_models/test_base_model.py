@@ -15,9 +15,20 @@ class TestBaseModel(unittest.TestCase):
         result = pep8style.check_files(['./models/base_model.py'])
         self.assertEqual(result.total_errors, 0)
 
-    def test_docstring(self):
-        """Check the docstring in the class"""
-        self.assertTrue(len(BaseModel.__doc__) >= 1)
+    def test_unit_base_pep8_conformance(self):
+        """Test that we conform to PEP8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        path = './tests/test_models/test_base_model.py'
+        result = pep8style.check_files([path])
+        self.assertEqual(result.total_errors, 0)
+
+    def test_file_storage_docstring(self):
+        """ Check the docstring in class """
+        self.assertIsNotNone(BaseModel.__doc__)
+        self.assertIsNotNone(BaseModel.__init__.__doc__)
+        self.assertIsNotNone(BaseModel.__str__.__doc__)
+        self.assertIsNotNone(BaseModel.save.__doc__)
+        self.assertIsNotNone(BaseModel.to_dict.__doc__)
 
     def test_type(self):
         """Test type"""
@@ -80,6 +91,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(my_dict['created_at']), str)
         self.assertEqual(type(my_dict['updated_at']), str)
         self.assertEqual(type(my_dict['id']), str)
+
+    def test_check_instance_exist(self):
+        """ Check if methods exist """
+        self.assertTrue(hasattr(BaseModel, "__init__"))
+        self.assertTrue(hasattr(BaseModel, "__str__"))
+        self.assertTrue(hasattr(BaseModel, "save"))
+        self.assertTrue(hasattr(BaseModel, "to_dict"))
 
 if __name__ == '__main__':
     unittest.main()

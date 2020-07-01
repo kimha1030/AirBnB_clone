@@ -8,19 +8,33 @@ from os import remove
 from datetime import datetime
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.__init__ import storage
 
 
 class TestFileStorage(unittest.TestCase):
     """Test for File Storage"""
-    def test_init_pep8_conformance(self):
+    def test_file_storage_pep8_conformance(self):
         """Test that we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['./models/engine/file_storage.py'])
+        path = './models/engine/file_storage.py'
+        result = pep8style.check_files([path])
         self.assertEqual(result.total_errors, 0)
 
-    def test_init_docstring(self):
-        """Check the docstring in the class"""
-        self.assertTrue(len(FileStorage.__doc__) >= 1)
+    def test_unit_file_storage_pep8_conformance(self):
+        """Test that we conform to PEP8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        path1 = './tests/test_models/test_engine/test_file_storage.py'
+        result = pep8style.check_files([path1])
+        self.assertEqual(result.total_errors, 0)
+
+    def test_file_storage_docstring(self):
+        """ Check the docstring """
+        self.assertIsNotNone(storage.__doc__)
+        self.assertIsNotNone(storage.__init__.__doc__)
+        self.assertIsNotNone(storage.all.__doc__)
+        self.assertIsNotNone(storage.new.__doc__)
+        self.assertIsNotNone(storage.save.__doc__)
+        self.assertIsNotNone(storage.reload.__doc__)
 
     def test_all(self):
         """Check method all"""
@@ -73,3 +87,11 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(type(FileStorage._FileStorage__objects), dict)
         self.assertEqual(type(FileStorage._FileStorage__objects[id_key]),
                          BaseModel)
+
+    def test_check_instance_exist(self):
+        """ Check if methods exist """
+        self.assertTrue(hasattr(storage, "__init__"))
+        self.assertTrue(hasattr(storage, "all"))
+        self.assertTrue(hasattr(storage, "new"))
+        self.assertTrue(hasattr(storage, "save"))
+        self.assertTrue(hasattr(storage, "reload"))
