@@ -35,11 +35,11 @@ class TestFileStorage(unittest.TestCase):
         base3 = BaseModel()
         size2 = len(FileStorage._FileStorage__objects)
         self.assertTrue(size2 > size1)
-        self.assertTrue(len(FileStorage._FileStorage__objects), 2)
+        self.assertEqual(len(FileStorage._FileStorage__objects), 2)
 
     def test_save(self):
         """ Check the method save"""
-        st_file1 = FileStorage
+        st_file1 = FileStorage()
         try:
             remove("file.json")
         except:
@@ -53,8 +53,20 @@ class TestFileStorage(unittest.TestCase):
             self.assertEqual(type(read_file), str)
         with open("file.json", 'r', encoding="UTF-8") as data_file1:
             data = json.load(data_file1)
-            for k, v in data.items():
-                FileStorage._FileStorage__objects[k] =\
-                 eval(v['__class__'])(**v)
-                new_obj = FileStorage._FileStorage__objects[id_key]
-                self.assertIsInstance(new_obj, BaseModel)
+            self.assertIsInstance(data, dict)
+
+    def test_reload(self):
+        """ Check the method save"""
+        st_file1 = FileStorage()
+        try:
+            remove("file.json")
+        except:
+            pass
+        FileStorage._FileStorage__objects = {}
+        base4 = BaseModel()
+        id_key = type(base4).__name__ + "." + base4.id
+        base4.save()
+        st_file1.reload()
+        self.assertEqual(type(FileStorage._FileStorage__objects), dict)
+        self.assertEqual(type(FileStorage._FileStorage__objects[id_key]),
+                         BaseModel)
