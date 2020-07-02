@@ -156,7 +156,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def default(self, args):
-        """shortcut
+        """shortcuts
         """
         my_list = []
         my_list = args.split(".")
@@ -175,13 +175,13 @@ class HBNBCommand(cmd.Cmd):
                        replace(", ", " ").replace(")", " "))
             com_id = shlex.split(new_str)
             cls_id = my_list[0] + " " + com_id[1]
-            cls_id2 = (my_list[0] + " " + com_id[1] +
-                       " " + com_id[2] + " " + com_id[3])
             if com_id[0] == "show":
                 return self.do_show(cls_id)
             elif com_id[0] == "destroy":
                 return self.do_destroy(cls_id)
             elif com_id[0] == "update":
+                cls_id2 = (my_list[0] + " " + com_id[1] +
+                           " " + com_id[2] + " " + com_id[3])
                 return self.do_update(cls_id2)
 
 if __name__ == '__main__':
