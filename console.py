@@ -154,12 +154,18 @@ class HBNBCommand(cmd.Cmd):
                 print(my_dict[key])
 
     def default(self, args):
-        """shortcuts
-        """
         my_list = []
         my_list = args.split(".")
         if my_list[1] == "all()":
             return self.do_all(my_list[0])
+        elif my_list[1] == "count()":
+            my_dict = storage.all()
+            count = 0
+            for k, v in my_dict.items():
+                class_name = k.split(".", 1)
+                if class_name[0] == my_list[0]:
+                    count += 1
+            print(count)
         else:
             new_str = my_list[1].replace("(", " ").replace(")", " ")
             com_id = shlex.split(new_str)
