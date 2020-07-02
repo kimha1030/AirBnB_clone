@@ -13,6 +13,7 @@ import models
 import cmd
 import sys
 import shlex
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -151,6 +152,13 @@ class HBNBCommand(cmd.Cmd):
                 setattr(my_dict[key], line[2], line[3])
                 storage.save()
                 print(my_dict[key])
+
+    def default(self, args):
+            my_list = []
+            my_list = args.split(".")
+            if globals().get(my_list[0]) is not None:
+                if my_list[1] == "all()":
+                    return self.do_all(my_list[0])
 
 if __name__ == '__main__':
     interpreter = HBNBCommand()
