@@ -167,13 +167,18 @@ class HBNBCommand(cmd.Cmd):
                     count += 1
             print(count)
         else:
-            new_str = my_list[1].replace("(", " ").replace(")", " ")
+            new_str = (my_list[1].replace("(", " ").
+                       replace(", ", " ").replace(")", " "))
             com_id = shlex.split(new_str)
             cls_id = my_list[0] + " " + com_id[1]
             if com_id[0] == "show":
                 return self.do_show(cls_id)
             elif com_id[0] == "destroy":
                 return self.do_destroy(cls_id)
+            elif com_id[0] == "update":
+                cls_id2 = (my_list[0] + " " + com_id[1] +
+                           " " + com_id[2] + " " + com_id[3])
+                return self.do_update(cls_id2)
 
 if __name__ == '__main__':
     interpreter = HBNBCommand()
