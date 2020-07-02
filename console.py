@@ -122,44 +122,19 @@ class HBNBCommand(cmd.Cmd):
                 my_list.append(str(v))
             print(my_list)
 
-    def do_update(self, args):
-        """ Updates an instance based on the class
-        name and id by adding or updating attribute
-
-        Args:
-            args ([str]): Class name and id
-        """
-        line = shlex.split(args)
-        if len(line) == 0 or line[0] == "":
-            print("** class name missing **")
-        elif globals().get(line[0]) is None:
-            print("** class doesn't exist **")
-        elif len(line) == 1 or line[1] == "":
-            print("** instance id missing **")
-        elif len(line) == 2:
-            my_dict = storage.all()
-            key = line[0]+"."+line[1]
-            if key not in my_dict:
-                print("** no instance found **")
-            else:
-                print("** attribute name missing **")
-        elif len(line) == 3:
-            print("** value missing **")
-        else:
-            my_dict = storage.all()
-            key = line[0]+"."+line[1]
-            if key in my_dict:
-                setattr(my_dict[key], line[2], line[3])
-                storage.save()
-                print(my_dict[key])
-
     def default(self, args):
-        """shortcuts
-        """
         my_list = []
         my_list = args.split(".")
         if my_list[1] == "all()":
             return self.do_all(my_list[0])
+        elif my_list[1] == "count()":
+            my_dict = storage.all()
+            count = 0
+            for k, v in my_dict.items():
+                class_name = k.split(".", 1)
+                if class_name[0] == my_list[0]:
+                    count += 1
+            print(count)
         else:
             new_str = my_list[1].replace("(", " ").replace(")", " ")
             com_id = shlex.split(new_str)
