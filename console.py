@@ -154,11 +154,10 @@ class HBNBCommand(cmd.Cmd):
                 print(my_dict[key])
 
     def default(self, args):
-            my_list = []
-            my_list = args.split(".")
-            if globals().get(my_list[0]) is not None:
-                if my_list[1] == "all()":
-                    return self.do_all(my_list[0])
+        my_list = []
+        my_list = args.split(".")
+        if my_list[1] == "all()":
+            return self.do_all(my_list[0])
 
 if __name__ == '__main__':
     interpreter = HBNBCommand()
