@@ -154,10 +154,20 @@ class HBNBCommand(cmd.Cmd):
                 print(my_dict[key])
 
     def default(self, args):
+        """shortcuts
+        """
         my_list = []
         my_list = args.split(".")
         if my_list[1] == "all()":
             return self.do_all(my_list[0])
+        else:
+            new_str = my_list[1].replace("(", " ").replace(")", " ")
+            com_id = shlex.split(new_str)
+            cls_id = my_list[0] + " " + com_id[1]
+            if com_id[0] == "show":
+                return self.do_show(cls_id)
+            elif com_id[0] == "destroy":
+                return self.do_destroy(cls_id)
 
 if __name__ == '__main__':
     interpreter = HBNBCommand()
